@@ -40,14 +40,13 @@
         android:ems="10"
         android:hint="code"
         android:inputType="textPersonName"
-        android:text="Name"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="@+id/nameet"
         app:layout_constraintRight_toRightOf="@+id/nameet"
         app:layout_constraintTop_toBottomOf="@+id/nameet"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="1.0" />
+        tools:layout_constraintTop_creator="1" />
 
     <EditText
         android:id="@+id/nameet"
@@ -57,7 +56,6 @@
         android:ems="10"
         android:hint="name"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintLeft_toRightOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView"
         tools:layout_constraintLeft_creator="1"

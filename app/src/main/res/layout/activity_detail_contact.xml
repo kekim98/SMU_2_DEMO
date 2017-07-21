@@ -49,8 +49,7 @@
         android:layout_marginBottom="38dp"
         app:layout_constraintLeft_toLeftOf="@+id/codetext"
         app:layout_constraintHorizontal_bias="1.0" />
-    <edittext android:layout_height="wrap_content" android:layout_width="fill_parent"  android:hint="ex)안드로이드">
-    </edittext>
+
 
     <TextView
         android:id="@+id/codetext"
@@ -65,8 +64,7 @@
         android:layout_marginBottom="281dp"
         app:layout_constraintLeft_toRightOf="@+id/textView2"
         android:layout_marginLeft="39dp" />
-    <edittext android:layout_height="wrap_content" android:layout_width="fill_parent"  android:hint="ex)안드로이드">
-    </edittext>
+
 
 
     <Button
