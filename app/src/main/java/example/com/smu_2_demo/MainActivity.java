@@ -55,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
     private void refresh() {
         Log.d("my","refresh");
         SharedPreferences pref = getSharedPreferences("MAIN",MODE_PRIVATE);
-
-        listadapter.clear();
         Map<String, ?> values = pref.getAll();
         for(String key: values.keySet()){
             Log.d("my","key:"+key);
