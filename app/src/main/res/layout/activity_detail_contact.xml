@@ -7,7 +7,7 @@
     tools:context="example.com.smu_2_demo.DetailContact"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp"
-    android:background="@drawable/acs">
+    android:background="@drawable/ddd">
 
     <TextView
         android:id="@+id/textView2"
