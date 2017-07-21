@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView list1 = (ListView) findViewById(R.id.mainlist);
+        final ListView list1 = (ListView) findViewById(R.id.mainlist);
         listadapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
         list1.setAdapter(listadapter);
         list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -38,6 +38,23 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, DetailContact.class);
                 intent.putExtra("name",name);
                 intent.putExtra("code",code);
+                SwipeDismissListViewTouchListener touchListener =
+                        new SwipeDismissListViewTouchListener(list1,
+                                new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                                    @Override
+                                    public boolean canDismiss(int position) {
+                                        return true;
+                                    }
+
+                                    @Override
+                                    public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                        for (int position : reverseSortedPositions) {
+                                            listadapter.remove(listadapter.getItem(position));
+                                        }
+                                    }
+                                });
+                list1.setOnTouchListener(touchListener);
+                list1.setOnScrollListener(touchListener.makeScrollListener());
                 startActivity(intent);
 
             }
