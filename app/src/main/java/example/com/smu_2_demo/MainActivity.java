@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
                 String code = pref.getString(name,"UNKNOWN");
                 Log.d("test","item"+name);
                 Log.d("test","code"+code);
-                Log.d("my","test");
                 Intent intent = new Intent(MainActivity.this, DetailContact.class);
                 intent.putExtra("name",name);
                 intent.putExtra("code",code);
