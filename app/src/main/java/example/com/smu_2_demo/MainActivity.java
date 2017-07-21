@@ -38,23 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, DetailContact.class);
                 intent.putExtra("name",name);
                 intent.putExtra("code",code);
-                SwipeDismissListViewTouchListener touchListener =
-                        new SwipeDismissListViewTouchListener(list1,
-                                new SwipeDismissListViewTouchListener.DismissCallbacks() {
-                                    @Override
-                                    public boolean canDismiss(int position) {
-                                        return true;
-                                    }
-
-                                    @Override
-                                    public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-                                        for (int position : reverseSortedPositions) {
-                                            listadapter.remove(listadapter.getItem(position));
-                                        }
-                                    }
-                                });
-                list1.setOnTouchListener(touchListener);
-                list1.setOnScrollListener(touchListener.makeScrollListener());
                 startActivity(intent);
                 Log.d("test","code"+code);
 
