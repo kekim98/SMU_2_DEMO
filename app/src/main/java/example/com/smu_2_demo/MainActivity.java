@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 list1.setOnTouchListener(touchListener);
                 list1.setOnScrollListener(touchListener.makeScrollListener());
                 startActivity(intent);
+                Log.d("test","code"+code);
 
             }
 
