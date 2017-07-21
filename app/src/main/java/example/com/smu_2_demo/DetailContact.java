@@ -20,7 +20,7 @@ public class DetailContact extends AppCompatActivity {
         Bundle extras = receiveintent.getExtras();
         String name = extras.getString("name","UNKNOWN");
         String code = extras.getString("code", "UNKNOWN");
-        Toast.makeText(getApplicationContext(),"이름:"+name+"학번:"+code+"열기",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"이름: "+name+"학번: "+code+" Open",Toast.LENGTH_SHORT).show();
         nameText.setText(name);
         codeText.setText(code);
     }

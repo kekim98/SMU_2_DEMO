@@ -18,7 +18,7 @@ public class AddContact extends AppCompatActivity {
 
         final TextView nameinput = (TextView) findViewById(R.id.nameet);
         final TextView codeinput = (TextView) findViewById(R.id.CODETEXT3);
-        Button saveButton = (Button) findViewById(R.id.button);
+        Button saveButton = (Button) findViewById(R.id.button3);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,15 +26,20 @@ public class AddContact extends AppCompatActivity {
                 String name = nameinput.getText().toString();
                 String code = codeinput.getText().toString();
 
-                SharedPreferences pref = getSharedPreferences("MAIN",MODE_PRIVATE);
+                SharedPreferences pref = getSharedPreferences("MAIN", MODE_PRIVATE);
                 pref.edit().putString(name, code).apply();
-                Toast.makeText(getApplicationContext(),"저장완료",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "저장완료", Toast.LENGTH_SHORT).show();
                 finish();
 
             }
 
         });
     }
+        public void onClick(View view){
+            Toast.makeText(getApplicationContext(),"저장취소",Toast.LENGTH_SHORT).show();
+            finish();
+    }
+
 
 }
 
