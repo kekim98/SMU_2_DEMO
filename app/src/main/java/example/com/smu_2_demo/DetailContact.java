@@ -24,7 +24,6 @@ public class DetailContact extends AppCompatActivity {
         nameText.setText(name);
         codeText.setText(code);
     }
-
     public void onClick(View view){
         Toast.makeText(getApplicationContext(),"돌아가기",Toast.LENGTH_SHORT).show();
         finish();
