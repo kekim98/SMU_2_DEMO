@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="example.com.smu_2_demo.DetailContact"
     tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:layout_editor_absoluteX="0dp"
+    android:background="@drawable/acs">
 
     <TextView
         android:id="@+id/textView2"
