@@ -28,7 +28,7 @@ public class AddContact extends AppCompatActivity {
                 SharedPreferences pref = getSharedPreferences("MAIN",MODE_PRIVATE);
                 pref.edit().putString(name, code).apply();
                 finish();
-                Log.d("my","ㅗ");
+
             }
 
         });
