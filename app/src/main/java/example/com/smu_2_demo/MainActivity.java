@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView list1 = (ListView) findViewById(R.id.mainlist);
+        final ListView list1 = (ListView) findViewById(R.id.mainlist);
         listadapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
         list1.setAdapter(listadapter);
         list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("name",name);
                 intent.putExtra("code",code);
                 startActivity(intent);
+                Log.d("test","code"+code);
 
             }
 
@@ -54,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
     private void refresh() {
         Log.d("my","refresh");
         SharedPreferences pref = getSharedPreferences("MAIN",MODE_PRIVATE);
-
-        listadapter.clear();
         Map<String, ?> values = pref.getAll();
         for(String key: values.keySet()){
             Log.d("my","key:"+key);
