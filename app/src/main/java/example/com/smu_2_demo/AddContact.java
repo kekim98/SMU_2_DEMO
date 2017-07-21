@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddContact extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class AddContact extends AppCompatActivity {
 
                 SharedPreferences pref = getSharedPreferences("MAIN",MODE_PRIVATE);
                 pref.edit().putString(name, code).apply();
+                Toast.makeText(getApplicationContext(),"저장완료",Toast.LENGTH_SHORT).show();
                 finish();
 
             }
