@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="backbtn">Volte-face</string>
+    <string name="code">Numéro d\'étudiant</string>
+    <string name="name">Nom</string>
+    <string name="savebtn">Stockage</string>
+    <string name="app_name">Carnetd\'adresses</string>
+</resources>

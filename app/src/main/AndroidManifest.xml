@@ -17,7 +17,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddContact" />
-        <activity android:name=".DetailContact"></activity>
+        <activity android:name=".DetailContact" />
+
+        <service
+            android:name=".DataService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

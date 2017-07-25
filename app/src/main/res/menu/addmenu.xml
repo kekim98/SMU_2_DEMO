@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/addbtn"
-        android:icon="?android:attr/textSelectHandle"
-        android:title="add Contact"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="@string/app_name"
         app:showAsAction="always" />
 </menu>
