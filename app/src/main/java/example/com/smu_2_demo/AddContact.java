@@ -34,6 +34,9 @@ public class AddContact extends AppCompatActivity {
     DataService mService;
     boolean mBound = false;
     public ArrayAdapter<String> listadapter;
+    static String codes[] = {"0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"};
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,6 @@ public class AddContact extends AppCompatActivity {
 
         final EditText codeinput = (EditText) findViewById(R.id.CODETEXT3);
         Button saveButton = (Button) findViewById(R.id.button3);
-
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -66,34 +68,102 @@ public class AddContact extends AppCompatActivity {
                     final String name = nameinput.getText().toString();
                     final String code = codeinput.getText().toString();
                     int i = 0;
+                    int j = 0;
                     final SharedPreferences pref = getSharedPreferences("MAIN2", MODE_PRIVATE);
                     final SharedPreferences.Editor editor = pref.edit();
 
-                    pref.edit().putString(name, code).apply();
+                    Map<String, ?> values = pref.getAll();
+                    for (String key : values.keySet()) {
+                            codes[i] = key; // name키값을 codes배열에 저장함
+                            Log.d("key", codes[i]);
+                            i+=1;
+                    }
 
-                    Toast.makeText(getApplicationContext(), "저장완료", Toast.LENGTH_SHORT).show();
+                    for(String values1 : codes){
+                        String name1 = pref.getString(values1,"failed"); // name1에 key에 대한 값들을 가져
+                        Log.d("key1",name1);
+                        if(code.equals(name1)){
+                            j++;
+                        }
+                    }
 
-                    NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    Intent intent = new Intent(AddContact.this, DetailContact.class);
-                    intent.putExtra("name", name);
-                    intent.putExtra("code", code);
+                    Log.d("value",""+j);
 
-                    PendingIntent pendingIntent = PendingIntent.getActivity(AddContact.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    if(j==0) {
 
-                    Notification.Builder mBuilder = new Notification.Builder(AddContact.this);
-                    mBuilder.setSmallIcon(R.drawable.contact3);
-                    mBuilder.setTicker("주소록에 " + name + "이(가) 추가되었습니다.");
-                    mBuilder.setWhen(System.currentTimeMillis());
-                    mBuilder.setContentTitle("주소록 추가");
-                    mBuilder.setContentText("이름 : " + name);
-                    mBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
-                    mBuilder.setContentIntent(pendingIntent);
-                    mBuilder.setAutoCancel(true);
+                        pref.edit().putString(name, code).apply();
 
-                    nm.notify(111, mBuilder.build());
+                        Toast.makeText(getApplicationContext(), "저장완료", Toast.LENGTH_SHORT).show();
 
+                        NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        Intent intent = new Intent(AddContact.this, DetailContact.class);
+                        intent.putExtra("name", name);
+                        intent.putExtra("code", code);
+
+                        PendingIntent pendingIntent = PendingIntent.getActivity(AddContact.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                        Notification.Builder mBuilder = new Notification.Builder(AddContact.this);
+                        mBuilder.setSmallIcon(R.drawable.contact3);
+                        mBuilder.setTicker("주소록에 " + name + "이(가) 추가되었습니다.");
+                        mBuilder.setWhen(System.currentTimeMillis());
+                        mBuilder.setContentTitle("주소록 추가");
+                        mBuilder.setContentText("이름 : " + name);
+                        mBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
+                        mBuilder.setContentIntent(pendingIntent);
+                        mBuilder.setAutoCancel(true);
+
+                        nm.notify(111, mBuilder.build());
+                        finish();
+
+                    }
+                    else{
+
+                        AlertDialog.Builder ad = new AlertDialog.Builder(AddContact.this);
+                        ad.setTitle("경고문");
+                        ad.setMessage("중복된 학번입니다. 추가하시겠습니까?");
+
+                        ad.setPositiveButton("추가", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                final SharedPreferences pref = getSharedPreferences("MAIN2", MODE_PRIVATE);
+                                final SharedPreferences.Editor editor = pref.edit();
+                                pref.edit().putString(name, code).apply();
+
+                                Toast.makeText(getApplicationContext(), "중복된 학번 저장완료", Toast.LENGTH_SHORT).show();
+
+                                NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                                Intent intent = new Intent(AddContact.this, DetailContact.class);
+                                intent.putExtra("name", name);
+                                intent.putExtra("code", code);
+
+                                PendingIntent pendingIntent = PendingIntent.getActivity(AddContact.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                                Notification.Builder mBuilder = new Notification.Builder(AddContact.this);
+                                mBuilder.setSmallIcon(R.drawable.contact3);
+                                mBuilder.setTicker("주소록에 " + name + "이(가) 추가되었습니다.");
+                                mBuilder.setWhen(System.currentTimeMillis());
+                                mBuilder.setContentTitle("주소록 추가");
+                                mBuilder.setContentText("이름 : " + name);
+                                mBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
+                                mBuilder.setContentIntent(pendingIntent);
+                                mBuilder.setAutoCancel(true);
+
+                                nm.notify(111, mBuilder.build());
+
+                                dialog.dismiss();
+                                finish();
+                            }
+                        });
+
+                        ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                dialog.dismiss();
+                            }
+                        });
+                        ad.show();
+                    }
                 }
-                finish();
             }
         });
 
@@ -145,7 +215,7 @@ public class AddContact extends AppCompatActivity {
     };
     public InputFilter filterKorAlpha = new InputFilter() {
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-            Pattern ps = Pattern.compile("^[ㄱ-ㅎ가-흐A-Za-z]+$");
+            Pattern ps = Pattern.compile("^[ㄱ-ㅎ가-흐 A-Za-z]+$");
             if (!ps.matcher(source).matches()) {
                 return "";
             }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">학번목록</string>
+    <string name="app_name">에브리상명</string>
     <string name="backbtn">뒤로가기</string>
     <string name="code">학번</string>
     <string name="name">이름</string>

@@ -6,26 +6,93 @@
     android:layout_height="match_parent"
     tools:context="example.com.smu_2_demo.MainActivity"
     android:background="@drawable/background"
-    >
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/g"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="57dp"
+        android:layout_height="0dp"
+        app:srcCompat="@drawable/j"
+        android:layout_marginStart="16dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/imageView6"
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/k"
+        app:layout_constraintRight_toLeftOf="@+id/hilist"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="146dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="54dp"
+        android:layout_height="53dp"
+        app:srcCompat="@drawable/q"
+        android:layout_marginStart="16dp"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/w"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintRight_toLeftOf="@+id/hilist"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        android:layout_marginRight="1dp" />
 
     <ListView
         android:id="@+id/hilist"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginStart="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.897"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toRightOf="@+id/imageView4"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"
-        tools:layout_editor_absoluteY="13dp" />
+        tools:layout_constraintBottom_creator="1" />
 
 </android.support.constraint.ConstraintLayout>
