@@ -5,19 +5,27 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Map;
+import java.util.regex.Pattern;
 
 public class AddContact extends AppCompatActivity {
     final int REQ_CODE_SELECT_IMAGE=100;
@@ -32,8 +40,11 @@ public class AddContact extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
-        final TextView nameinput = (TextView) findViewById(R.id.nameet);
-        final TextView codeinput = (TextView) findViewById(R.id.CODETEXT3);
+
+        final EditText nameinput = (EditText) findViewById(R.id.nameet);
+        nameinput.setFilters(new InputFilter[]{filterKorAlpha});
+
+        final EditText codeinput = (EditText) findViewById(R.id.CODETEXT3);
         Button saveButton = (Button) findViewById(R.id.button3);
 
 
@@ -42,58 +53,50 @@ public class AddContact extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(TextUtils.isEmpty(nameinput.getText())&&(TextUtils.isEmpty(codeinput.getText()))){
-                    Toast.makeText(getApplicationContext(),"이름과 학번 모두 입력되지 않았습니다. 이름과 학번을 입력하세요",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(nameinput.getText()) && (TextUtils.isEmpty(codeinput.getText()))) {
+                    Toast.makeText(getApplicationContext(), "이름과 학번 모두 입력되지 않았습니다. 이름과 학번을 입력하세요", Toast.LENGTH_SHORT).show();
                     return;
-                }
-
-                else if(TextUtils.isEmpty(nameinput.getText())){
-                    Toast.makeText(getApplicationContext(),"이름이 입력되지 않았습니다. 이름을 입력하세요",Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(nameinput.getText())) {
+                    Toast.makeText(getApplicationContext(), "이름이 입력되지 않았습니다. 이름을 입력하세요", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(TextUtils.isEmpty(codeinput.getText())){
-                    Toast.makeText(getApplicationContext(),"학번이 입력되지 않았습니다. 학번을 입력하세요",Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(codeinput.getText())) {
+                    Toast.makeText(getApplicationContext(), "학번이 입력되지 않았습니다. 학번을 입력하세요", Toast.LENGTH_SHORT).show();
                     return;
-                }
-
-                else {
-                    String name = nameinput.getText().toString();
-                    String code = codeinput.getText().toString();
-
-                    //Intent goservice = new Intent(AddContact.this, DataService.class);
-                    //goservice.putExtra("name",name);
-                    //goservice.putExtra("code",code);
-                    //bindService(goservice, mConnection, Context.BIND_AUTO_CREATE);
-
-                    final SharedPreferences pref = getSharedPreferences("MAIN2",MODE_PRIVATE);
+                } else {
+                    final String name = nameinput.getText().toString();
+                    final String code = codeinput.getText().toString();
+                    int i = 0;
+                    final SharedPreferences pref = getSharedPreferences("MAIN2", MODE_PRIVATE);
                     final SharedPreferences.Editor editor = pref.edit();
-                    pref.edit().putString(name,code).apply();
+
+                    pref.edit().putString(name, code).apply();
 
                     Toast.makeText(getApplicationContext(), "저장완료", Toast.LENGTH_SHORT).show();
 
                     NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    Intent intent = new Intent(AddContact.this,DetailContact.class);
-                    intent.putExtra("name",name);
-                    intent.putExtra("code",code);
+                    Intent intent = new Intent(AddContact.this, DetailContact.class);
+                    intent.putExtra("name", name);
+                    intent.putExtra("code", code);
+
                     PendingIntent pendingIntent = PendingIntent.getActivity(AddContact.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                     Notification.Builder mBuilder = new Notification.Builder(AddContact.this);
                     mBuilder.setSmallIcon(R.drawable.contact3);
-                    mBuilder.setTicker("주소록에 "+name+"이(가) 추가되었습니다.");
+                    mBuilder.setTicker("주소록에 " + name + "이(가) 추가되었습니다.");
                     mBuilder.setWhen(System.currentTimeMillis());
                     mBuilder.setContentTitle("주소록 추가");
-                    mBuilder.setContentText("이름 : "+name);
+                    mBuilder.setContentText("이름 : " + name);
                     mBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
                     mBuilder.setContentIntent(pendingIntent);
                     mBuilder.setAutoCancel(true);
 
                     nm.notify(111, mBuilder.build());
 
-                    finish();
                 }
+                finish();
             }
-
         });
+
     }
 
     public void onClick(View view){
@@ -140,4 +143,14 @@ public class AddContact extends AppCompatActivity {
             mBound = false;
         }
     };
+    public InputFilter filterKorAlpha = new InputFilter() {
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            Pattern ps = Pattern.compile("^[ㄱ-ㅎ가-흐A-Za-z]+$");
+            if (!ps.matcher(source).matches()) {
+                return "";
+            }
+            return null;
+        }
+    };
+
 }

@@ -10,4 +10,8 @@
         <item name="android:statusBarColor">@color/colorPrimary5</item>
     </style>
 
+    <style name="SplashTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name = "android:windowBackground">@drawable/ccc</item>
+    </style>
+
 </resources>

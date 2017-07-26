@@ -1,6 +1,7 @@
 package example.com.smu_2_demo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +21,7 @@ public class DetailContact extends AppCompatActivity {
 
         Intent receiveintent = getIntent();
         Bundle extras = receiveintent.getExtras();
-        String name = extras.getString("name","UNKNOWN");
+        String name = extras.getString("name", "UNKNOWN");
         String code = extras.getString("code", "UNKNOWN");
         Toast.makeText(getApplicationContext(),"이름: "+name+"학번: "+code+" Open",Toast.LENGTH_SHORT).show();
         nameText.setText(name);
